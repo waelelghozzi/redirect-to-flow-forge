@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting…</title>
+
+  <!-- Open Graph tags so LinkedIn shows a nice preview -->
+  <meta property="og:title" content="Flowforge" />
+  <meta property="og:description" content="Redirecting to Flowforge…" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://waelelghozzi.github.io/redirect-to-flow-forge/" />
+
+  <!-- No indexing needed for a redirector -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <script>
+    // Whitelist of allowed destinations — prevents abuse of your redirector
+    const ALLOWED = [
+      "https://flow-forge-d9c.pages.dev/login"
+      // Add more allowed URLs here if needed
+    ];
+
+    // Read ?to= parameter (must match an entry in ALLOWED exactly)
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("to");
+
+    if (target && ALLOWED.includes(target)) {
+      // Redirect after a tiny delay so LinkedIn's crawler sees a 200 page
+      window.location.replace(target);
+    } else {
+      // Show a friendly fallback page
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("msg").textContent =
+          "Invalid or missing redirect target.";
+      });
+    }
+  </script>
+</head>
+<body style="font-family: system-ui, sans-serif; max-width: 600px; margin: 4rem auto; padding: 0 1rem;">
+  <h1>Flowforge</h1>
+  <p id="msg">Redirecting you now…</p>
+  <p>
+    If you are not redirected automatically,
+    <a id="manual" href="https://flow-forge-d9c.pages.dev/">click here</a>.
+  </p>
+  <noscript>
+    <p>JavaScript is disabled. <a href="https://flow-forge-d9c.pages.dev/login">Click here to continue.</a></p>
+  </noscript>
+</body>
+</html>
