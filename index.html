@@ -5,7 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Redirecting to Flowforge…</title>
 
-  <!-- Open Graph tags so LinkedIn shows a preview -->
+  <!-- Prevent any caching so this version always loads -->
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+
+  <!-- Open Graph (LinkedIn preview) -->
   <meta property="og:title" content="Flowforge" />
   <meta property="og:description" content="Redirecting to Flowforge…" />
   <meta property="og:type" content="website" />
@@ -13,8 +18,13 @@
 
   <meta name="robots" content="noindex, nofollow" />
 
-  <!-- Instant redirect as soon as the head is parsed -->
+  <!-- Layer 1: HTML meta refresh — fires before JS, even if JS is blocked -->
   <meta http-equiv="refresh" content="0; url=https://flow-forge-d9c.pages.dev/login">
+
+  <!-- Layer 2: Inline JS in <head> — runs before body renders, fastest possible -->
+  <script>
+    window.location.replace("https://flow-forge-d9c.pages.dev/login");
+  </script>
 
   <style>
     body {
@@ -24,18 +34,20 @@
       align-items: center;
       justify-content: center;
       font-family: system-ui, sans-serif;
-      font-size: 14px;
-      color: #555;
-    } 
+      font-size: 13px;
+      color: #666;
+    }
     a { color: #0066cc; }
   </style>
 </head>
 <body>
   <p>Redirecting to <a href="https://flow-forge-d9c.pages.dev/login">Flowforge</a>…</p>
 
+  <!-- Layer 3: backup redirect in case earlier layers somehow failed -->
   <script>
-    // JS redirect (faster than meta refresh); fallback link stays visible if it fails
-    window.location.replace("https://flow-forge-d9c.pages.dev/login");
+    setTimeout(function () {
+      window.location.href = "https://flow-forge-d9c.pages.dev/login";
+    }, 100);
   </script>
 </body>
 </html>
